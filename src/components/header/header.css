@@ -42,3 +42,12 @@
     cursor: pointer;
      
 }
+.date{
+    /*finish this Jalith. Don't remove z-index*/
+    z-index: 2;
+}
+
+.options{
+    /*finish this Jalith. Don't remove z-index*/
+    z-index: 2;
+}
