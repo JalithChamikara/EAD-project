@@ -43,7 +43,6 @@
     cursor: pointer;
      
 }
-
 .headerSearch{
     height: 50px;
     background-color: white;
@@ -119,4 +118,13 @@
 
 .optionCounterButton:disabled{
     cursor: not-allowed;
+}
+.date{
+    /*finish this Jalith. Don't remove z-index*/
+    z-index: 2;
+}
+
+.options{
+    /*finish this Jalith. Don't remove z-index*/
+    z-index: 2;
 }
