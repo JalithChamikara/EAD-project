@@ -1,0 +1,96 @@
+.loginContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.loginWrapper{
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+}
+
+.loginInput{
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    position: sticky;
+    top: 10px;
+    height: max-content;
+}
+
+.inputTittle{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.instruction{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.lsItem{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.inputLable{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.inputItem>input{
+    height: 35px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #345edc;
+    border-radius: 5px;
+}
+
+.inputItem>button{
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #0071c2;
+    color: white;
+    border: none;
+    width: 100%;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.passwordContainer {
+    position: relative;
+    width: 100%;
+}
+
+.password {
+    width: 100%;
+    padding-right: 35px; /* Leave space for the toggle icon */
+    height: 35px;
+    padding: 5px;
+    border: 1px solid #345edc;
+    border-radius: 5px;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px; /* Adjust for visibility */
+    color: #0071c2;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}

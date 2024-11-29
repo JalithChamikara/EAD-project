@@ -11,6 +11,8 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import Reviews from "../../components/reviews/Reviews";
+import ReviewForm from "../../components/reviewForm/ReviewForm";
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -136,6 +138,8 @@ const Hotel = () => {
             </div>
           </div>
         </div>
+        <Reviews />
+        <ReviewForm />
         <MailList />
         <Footer />
       </div>
