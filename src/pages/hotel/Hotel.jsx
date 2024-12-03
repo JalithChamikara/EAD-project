@@ -10,13 +10,29 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reviews from "../../components/reviews/Reviews";
 import ReviewForm from "../../components/reviewForm/ReviewForm";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 const Hotel = () => {
+  const {hotelId} = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [hotel, setHotel] = useState(null);
+
+  useEffect(() => {
+    const baseUrl = `http://localhost:8080/hotels/${hotelId}`;
+    axios.get(baseUrl).then((response) => {
+      setHotel(response.data);
+      console.log("Hotel Details:", response.data);
+      console.log("hotel Id" ,hotelId);
+    }).catch(error => {
+      console.error("There was an error fetching the hotel details!", error);
+    });
+  }, [hotelId]);
 
   const photos = [
     {
@@ -83,12 +99,13 @@ const Hotel = () => {
             />
           </div>
         )}
-        <div className="hotelWrapper">
+        {hotel &&(
+          <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle">Tower Street Apartments</h1>
+          <h1 className="hotelTitle">{hotel.hotelName}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>Elton St 125 New york</span>
+            <span>{hotel.hotelAddress}</span>
           </div>
           <span className="hotelDistance">
             Excellent location – 500m from center
@@ -112,24 +129,14 @@ const Hotel = () => {
             <div className="hotelDetailsTexts">
               <h1 className="hotelTitle">Stay in the heart of City</h1>
               <p className="hotelDesc">
-                Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service.
+                {hotel.hotelDescription}
               </p>
             </div>
             <div className="hotelDetailsPrice">
               <h1>Perfect for a 9-night stay!</h1>
               <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
+                Located in the real heart of {hotel.hotelAddress}, this property has an
+                excellent location score of {hotel.rating}!
               </span>
               <h2>
                 <b>$945</b> (9 nights)
@@ -138,6 +145,7 @@ const Hotel = () => {
             </div>
           </div>
         </div>
+      )}      
         <Reviews />
         <ReviewForm />
         <MailList />
