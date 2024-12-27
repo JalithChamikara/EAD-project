@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import './list.css'
 import Header from '../../components/header/Header'
 import Navbar from '../../components/navbar/Navbar'
@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import { format } from 'date-fns'
 import { DateRange } from 'react-date-range'
 import SearchItem from '../../components/searchitem/searchitem'
+import axios from 'axios'
 
 const list = () => {
   const location = useLocation();
@@ -13,6 +14,21 @@ const list = () => {
   const [date,setDate] = useState(location.state.date);
   const [openDate,setOpenDate] = useState(false);
   const [options,setOption] = useState(location.state.options);
+  const [hotels, setHotels] = useState([]);
+
+  useEffect(() => { 
+    const fetchHotels = async () => { 
+    try { 
+      const response = await axios.get('http://localhost:8080/hotels'); 
+      setHotels(response.data); 
+      console.log("hotels: "+response.data)
+      response.data.forEach((hotel, index) => {
+        console.log(`Hotel ${index + 1}:`, hotel); });
+   } catch (error) { 
+    console.error('Error fetching hotels:', error); } 
+  };
+     fetchHotels(); }, []);
+
   return (
     <div>
       <Navbar/>
@@ -74,14 +90,9 @@ const list = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
+          {hotels.map((hotel) => ( 
+            <SearchItem key={hotel.hotelId} hotel={hotel} /> 
+            ))}
           </div>
         </div>
       </div>
