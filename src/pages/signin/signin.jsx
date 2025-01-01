@@ -1,20 +1,41 @@
 import React, { useState } from "react";
 import "./signin.css";
 import Navbar from "../../components/navbar/Navbar";
+import { Navigate, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signin = () => {
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
-    const handleSignIn = () => {
-        if (!password) {
-            setErrorMessage("Password cannot be empty");
-        } else {
-            setErrorMessage(""); // Clear the error
-            // Proceed with sign-in logic
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        if(!email){
+            setErrorMessage("Email Cannot be Empty");
         }
-    };
+        else if(!password){
+            setErrorMessage("Password Cannot be Empty")
+        }
+        else{
+            setErrorMessage("");
+            try{
+                const response = await axios.post(`http://localhost:8082/users/login?email=${email}&password=${password}`);
+                console.log("User Logged in Successfully!:", response.data);
+                toast.success("User Logged in Successfully! ")
+                navigate("/")
+                localStorage.setItem('user',JSON.stringify(response.data));
+            }
+            catch(error){
+                console.error("Error Logging in:", error);
+                setErrorMessage('Invalid email or password. Please try again.')
+            }
+        }
+    }
 
     return (
         <div>
@@ -30,7 +51,8 @@ const Signin = () => {
                             <div className="inputLable">
                                 <label>Email address</label>
                             </div>
-                            <input type="text" className="emailAddress" />
+                            <input type="email" className="emailAddress" value={email}
+                            onChange={(e) => setEmail(e.target.value)} required/>
                         </div>
                         <div className="inputItem">
                             <div className="inputLable">
@@ -42,6 +64,7 @@ const Signin = () => {
                                     className="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
+                                    required
                                 />
                                 <span
                                     className="togglePassword"
