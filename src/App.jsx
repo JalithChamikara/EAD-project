@@ -5,6 +5,7 @@ import Hotel from "./pages/hotel/Hotel.jsx";
 import Signin from "./pages/signin/signin.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import Profile from "./pages/Profile/profile.jsx";
+import Bookings from "./pages/bookings/bookings.jsx";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signin" element={<Signin />}/>
         <Route path="/signup" element={<Signup />}/>
         <Route path="/Profile" element={<Profile />}/>
+        <Route path="/bookings" element={<Bookings />}/>
       </Routes>
     </BrowserRouter>
      
