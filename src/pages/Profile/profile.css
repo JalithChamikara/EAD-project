@@ -1,0 +1,92 @@
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .field-label {
+    flex: 1;
+  }
+  
+  .edit-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-container input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .saveButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .saveButton:hover {
+    background-color: #0056b3;
+  }
+
+  .cancelButton {
+    background-color: #fff;
+    color: #0056b3;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .cancelButton:hover {
+    background-color: #c4e1ff;
+  }
+
+  .edit-button {
+    margin-left: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 6px 10px;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .verified {
+    color: green;
+    margin-left: 10px;
+  }
