@@ -27,7 +27,7 @@ const SearchItem = ({hotel}) => {
             <div className="siDesc">
                 <h1 className="siTitle">{hotel.hotelName}</h1> 
                 <span className="siAddress">{hotel.hotelAddress}</span> 
-                <span className="siDescription">{hotel.hotelDescription}</span> 
+                {/* <span className="siDescription">{hotel.hotelDescription}</span>  */}
                 <span className="siAmenities">{amenities && amenities.join(', ')}</span> 
                 <span className="siRating">Rating: {hotel.rating}</span>
                 <span className="siDistance">500m from center</span>

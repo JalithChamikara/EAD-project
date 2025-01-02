@@ -4,6 +4,7 @@ import List from "./pages/list/list.jsx";
 import Hotel from "./pages/hotel/Hotel.jsx";
 import Signin from "./pages/signin/signin.jsx";
 import Signup from "./pages/signup/signup.jsx";
+import Room from "./pages/Room/Room.jsx";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/hotels/:hotelId" element={<Hotel />}/>
         <Route path="/signin" element={<Signin />}/>
         <Route path="/signup" element={<Signup />}/>
+        <Route path="/rooms/:hotelId" element={<Room />} />
       </Routes>
     </BrowserRouter>
      

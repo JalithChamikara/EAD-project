@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import Reviews from "../../components/reviews/Reviews";
 import ReviewForm from "../../components/reviewForm/ReviewForm";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Hotel = () => {
@@ -33,6 +33,12 @@ const Hotel = () => {
       console.error("There was an error fetching the hotel details!", error);
     });
   }, [hotelId]);
+
+  const navigate = useNavigate();
+
+  const handleReserveClick = () =>{
+    navigate(`/rooms/${hotel.hotelId}`)
+  }
 
   const photos = [
     {
@@ -141,7 +147,7 @@ const Hotel = () => {
               <h2>
                 <b>${hotel.pricePerNight*9}</b> (9 nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleReserveClick}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>
