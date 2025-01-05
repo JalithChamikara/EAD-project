@@ -38,6 +38,7 @@ const RoomItem = ({ room , checkInDate, checkOutDate, adults, children }) => {
           'Content-Type': 'application/json'
         }
       });
+        localStorage.setItem('bookings',JSON.stringify(response.data));
         console.log("booking successful!", response.data);
         toast.success('Booking Successful!')
     }

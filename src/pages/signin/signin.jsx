@@ -14,28 +14,34 @@ const Signin = () => {
     const navigate = useNavigate();
 
     const handleSignIn = async (e) => {
-        e.preventDefault();
-        if(!email){
-            setErrorMessage("Email Cannot be Empty");
+        e.preventDefault(); // Prevent form submission
+        
+        if (!email || !password) {
+            setErrorMessage(email ? "Password Cannot be Empty" : "Email Cannot be Empty");
+            return;
         }
-        else if(!password){
-            setErrorMessage("Password Cannot be Empty")
-        }
-        else{
-            setErrorMessage("");
-            try{
-                const response = await axios.post(`http://localhost:8082/users/login?email=${email}&password=${password}`);
-                console.log("User Logged in Successfully!:", response.data);
-                toast.success("User Logged in Successfully! ")
-                navigate("/")
-                localStorage.setItem('user',JSON.stringify(response.data));
+    
+        try {
+            const response = await axios.post(`http://localhost:8082/users/login?email=${email}&password=${password}`);
+            
+            // Store user data first
+            await localStorage.setItem('user', JSON.stringify(response.data));
+            
+            // Verify storage
+            const storedUser = localStorage.getItem('user');
+            console.log('Stored user:', storedUser); // Debug log
+            
+            if (storedUser) {
+                toast.success("User Logged in Successfully!");
+                navigate("/");
+            } else {
+                throw new Error('Failed to store user data');
             }
-            catch(error){
-                console.error("Error Logging in:", error);
-                setErrorMessage('Invalid email or password. Please try again.')
-            }
+        } catch (error) {
+            console.error("Error Logging in:", error);
+            setErrorMessage('Invalid email or password. Please try again.');
         }
-    }
+    };
 
     return (
         <div>
@@ -48,6 +54,7 @@ const Signin = () => {
                         <span className="instruction">
                             You can sign in using your Booking.com account to access our services.
                         </span>
+                        <form>
                         <div className="inputItem">
                             <div className="inputLable">
                                 <label>Email address</label>
@@ -75,6 +82,8 @@ const Signin = () => {
                                 </span>
                             </div>
                         </div>
+                        </form>
+                        
                         {errorMessage && <div className="error">{errorMessage}</div>}
                         <div className="inputItem">
                             <button onClick={handleSignIn}>Sign in</button>
