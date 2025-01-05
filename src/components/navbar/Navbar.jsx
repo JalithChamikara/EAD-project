@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import ProfileButton from '../profileButton/ProfileButton'
 import Home from "../../pages/home/Home";
 
 
@@ -28,6 +29,15 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const handleProfile = ()=>{
+    navigate('/profile');
+  }
+
+  const handleBooking = ()=>{
+    navigate('/bookings');
+  }
+  
+
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -35,14 +45,16 @@ const Navbar = () => {
         <div className="navItems">
           {username ? (
             <>
-              <span className="navGreeting">Hi, {username}</span>
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                className="navLogoutIcon"
-                onClick={handleLogout}
-                title="Logout"
-              />
-            </>
+            <ProfileButton handleLogout={handleLogout}
+             handleBooking={handleBooking} 
+             handleProfile={handleProfile}/>
+            {/* <FontAwesomeIcon
+              icon={faSignOutAlt}
+              className="navLogoutIcon"
+              onClick={handleLogout}
+              title="Logout"
+            /> */}
+          </>           
           ) : (
             <>
               <button className="navButton" onClick={() => navigate("/signup")}>Register</button>

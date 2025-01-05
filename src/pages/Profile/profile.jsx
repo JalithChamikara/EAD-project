@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 
 const Profile = () => {
   const [fields, setFields] = useState({
-    name: "Jalith Chamikara",
-    displayName: "Jalith",
-    email: "premjalith@gmail.com",
+    name: "",
+    displayName: "",
+    email: "",
     phone: "",
     dob: "",
     nationality: "",
@@ -15,6 +15,24 @@ const Profile = () => {
     address: "",
     passport: "Not provided",
   });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user){
+      setFields({
+        name: user.username || "",
+        displayName: user.displayName || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        dob: user.dob || "",
+        nationality: user.nationality || "",
+        gender: user.gender || "",
+        address: user.address || "",
+        passport: user.passport || "Not provided"
+
+      })
+    }
+  },[]);
 
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState("");

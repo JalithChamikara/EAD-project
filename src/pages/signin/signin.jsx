@@ -40,6 +40,7 @@ const Signin = () => {
     return (
         <div>
             <Navbar />
+            <ToastContainer />
             <div className="loginContainer">
                 <div className="loginWrapper">
                     <div className="loginInput">
