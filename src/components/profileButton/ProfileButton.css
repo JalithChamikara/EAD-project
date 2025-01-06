@@ -1,0 +1,64 @@
+.profile-button-container {
+    position: relative;/* Needed for dropdown positioning */
+  }
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent; /* Blue background */
+    padding: 10px 15px;
+    border-radius: 50px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #fff; /* Add border around image */
+    margin-right: 10px;
+  }
+  
+  .profile-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-name {
+    font-weight: bold;
+    font-size: 13px;
+  }
+  
+  /* Dropdown Menu Styles */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position below the profile button */
+    right: 0;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px -25px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.4);
+    overflow: hidden;
+    z-index: 10; /* Ensure it appears above other content */
+    min-width: 150px;
+  }
+  
+  .dropdown-item {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #4f4f4f;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }
+
+  .profileIcon{
+    padding-right: 10px;
+    color: #4f4f4f;
+}
