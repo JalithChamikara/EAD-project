@@ -153,7 +153,7 @@ const Hotel = () => {
         </div>
       )}      
         <Reviews />
-        <ReviewForm />
+        <ReviewForm  hotelId={hotelId}/>
         <MailList />
         <Footer />
       </div>

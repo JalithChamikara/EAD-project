@@ -2,32 +2,56 @@ import { useState } from "react";
 import "./reviewForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
+import { toast, ToastContainer } from "react-toastify";
 
-const ReviewForm = () => {
+const ReviewForm = ({hotelId}) => {
   const [rating, setRating] = useState(0);
+  const [message, setMessage] = useState("");
   const [hover, setHover] = useState(0);
-  const [review, setReview] = useState("");
-  const [name, setName] = useState("");
+  const [loading, setLoading] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Here you would typically send the review data to your backend
-    console.log({
-      rating,
-      review,
-      name,
-      hotelId: "current-hotel-id", // You'll need to pass this as a prop
-      date: new Date().toISOString()
-    });
-    
-    // Clear form
-    setRating(0);
-    setReview("");
-    setName("");
+    setLoading(true);
+
+    try{
+      const user= JSON.parse(localStorage.getItem('user'));
+
+      if(!user|| !user.id){
+        toast.error('Please login to submit a review');
+        return;
+      }
+
+      const reviewData = {
+        hotelId :hotelId,
+        userId: user.id,
+        message: message,
+        rating: rating
+      }
+
+      const response = await axios.post('http://localhost:8084/reviews', reviewData,{
+        headers: {
+          'Content-Type':'application/json'
+        }
+      });
+      toast.success('Review submitted successfully!');
+      console.log('Review submitted:', response.data);
+      setRating(0);
+      setMessage("");
+    }
+    catch(error){
+      console.error('Error submitting review:', error);
+      toast.error('Failed to submit review. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
+    
     <div className="reviewForm">
+      <ToastContainer />
       <h2>Write a Review</h2>
       <form onSubmit={handleSubmit}>
         <div className="ratingContainer">
@@ -49,7 +73,7 @@ const ReviewForm = () => {
           </div>
         </div>
         
-        <div className="formGroup">
+        {/* <div className="formGroup">
           <label>Your Name:</label>
           <input
             type="text"
@@ -57,21 +81,22 @@ const ReviewForm = () => {
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </div>
+        </div> */}
 
         <div className="formGroup">
           <label>Your Review:</label>
           <textarea
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write your review here..."
             required
-            rows="4"
+            rows="6"
           />
         </div>
 
-        <button type="submit" className="submitReview">
-          Submit Review
-        </button>
+        <button className="submitReview" type="submit" disabled={loading || !rating || !message}>
+        {loading ? 'Submitting...' : 'Submit Review'}
+      </button>
       </form>
     </div>
   );
