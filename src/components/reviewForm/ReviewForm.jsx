@@ -72,16 +72,6 @@ const ReviewForm = ({hotelId}) => {
             })}
           </div>
         </div>
-        
-        {/* <div className="formGroup">
-          <label>Your Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div> */}
 
         <div className="formGroup">
           <label>Your Review:</label>
