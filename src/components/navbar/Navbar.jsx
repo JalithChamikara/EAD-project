@@ -36,6 +36,10 @@ const Navbar = () => {
   const handleBooking = ()=>{
     navigate('/bookings');
   }
+
+  const handleReviews = ()=>{
+    navigate('/reviews');
+  }
   
 
   return (
@@ -47,7 +51,8 @@ const Navbar = () => {
             <>
             <ProfileButton handleLogout={handleLogout}
              handleBooking={handleBooking} 
-             handleProfile={handleProfile}/>
+             handleProfile={handleProfile}
+             handleReviews= {handleReviews}/>
             {/* <FontAwesomeIcon
               icon={faSignOutAlt}
               className="navLogoutIcon"

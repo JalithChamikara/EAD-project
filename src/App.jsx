@@ -8,6 +8,7 @@ import Room from "./pages/Room/Room.jsx";
 import Profile from "./pages/Profile/profile.jsx"
 import Bookings from "./pages/bookings/bookings.jsx";
 import Navbar from "./components/navbar/Navbar.jsx";
+import Reviews from "./pages/Reviews/Reviews.jsx";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/rooms/:hotelId" element={<Room />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/bookings" element={<Bookings/>} />
+        <Route path="/reviews" element={<Reviews/>} />
       </Routes>
     </BrowserRouter>
      

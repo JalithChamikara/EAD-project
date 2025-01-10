@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileButton.css"; // CSS for ProfileButton
 import profileImage from "../../assets/img/pimg.jpg";
-import { faBriefcase, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBriefcase, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons/faSignOut";
 import { useNavigate } from "react-router-dom";
 
-const ProfileButton = ({handleLogout , handleBooking, handleProfile}) => {
+const ProfileButton = ({handleLogout , handleBooking, handleProfile, handleReviews}) => {
   const navigate = useNavigate()
   const [openDropdown, setOpenDropdown] = useState(false); // State to control dropdown visibility
 
@@ -44,6 +44,10 @@ const ProfileButton = ({handleLogout , handleBooking, handleProfile}) => {
           <div className="dropdown-item" onClick={handleBooking}>
           <FontAwesomeIcon icon={faBriefcase} className="profileIcon"/>
             Bookings and Trips
+          </div>
+          <div className="dropdown-item" onClick={handleReviews}>
+          <FontAwesomeIcon icon={faStar} className="profileIcon"/>
+            My Reviews
           </div>
           <div className="dropdown-item"  onClick={handleLogout}>
           <FontAwesomeIcon icon={faSignOut} className="profileIcon"/>
