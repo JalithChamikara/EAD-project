@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [hotelNames, setHotelNames] = useState({});
   const [error, setError] = useState(null);
 
   // Fetch bookings
@@ -16,12 +17,33 @@ const Bookings = () => {
     fetchBookings();
   }, []);
 
+  const fetchHotelName = async (hotelId) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/hotels/${hotelId}`);
+      return response.data.hotelName;
+    } catch (error) {
+      console.error(`Error fetching hotel name for ${hotelId}:`, error);
+      return 'Unknown Hotel';
+    }
+  };
+
   const fetchBookings = async () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user && user.id) {
         const baseUrl = `http://localhost:8081/user/${user.id}/bookings`;
         const response = await axios.get(baseUrl);
+        
+        // Fetch hotel names for all bookings
+        const hotelNamesMap = {};
+        await Promise.all(
+          response.data.map(async (booking) => {
+            const hotelName = await fetchHotelName(booking.hotelId);
+            hotelNamesMap[booking.hotelId] = hotelName;
+          })
+        );
+        
+        setHotelNames(hotelNamesMap);
         setBookings(response.data);
       }
     } catch (error) {
@@ -113,11 +135,16 @@ const Bookings = () => {
         {bookings.length > 0 ? (
           bookings.map((booking) => (
             <div key={booking.bookingId} className="booking-card">
-  <div className="booking-info">
-    <div className="booking-header">
-      <h3>Booking Details</h3>
-      <span className="booking-id">ID: {booking.bookingId}</span>
-    </div>
+      <div className="booking-info">
+        <div className="booking-header">
+          <h3>Booking Details</h3>
+          <span className="booking-id">{hotelNames[booking.hotelId] || 'Loading...'}</span>
+        </div>
+        
+        <div className="hotel-name">
+          <span className="detail-label"></span>
+          <span className="detail-value"></span>
+        </div>
     
     <div className="booking-dates">
       <div className="date-group">
