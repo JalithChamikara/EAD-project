@@ -15,7 +15,7 @@ This repository contains the frontend of the Hotel Booking System, built with Re
 - User-friendly UI for booking hotels
 - Search functionality to find hotels by location, dates, and number of guests
 - Integration with backend API to fetch hotel data
-- Responsive design for mobile and desktop
+- Responsive design for desktop
 
 ## Installation
 
